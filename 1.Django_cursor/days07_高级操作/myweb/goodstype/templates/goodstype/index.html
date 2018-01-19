@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页展示</title>
+</head>
+<body>
+<h1>商品类型查看</h1>
+<h2><a href="{% url 'gt:add' %}">添加一个类型</a></h2>
+    {% for goodstype in gtlist %}
+        <div>当前类型>>>>>>>>>>>>>>>>>{{goodstype.name}}</div>
+        <div>父级类型：
+            {% if goodstype.pid %}
+                <p>{{goodstype.pid.name}}</p>
+            {% else %}
+                <p>没有父类型</p>
+            {% endif %}
+        </div>
+
+        <div>下级类型：
+            {% for gt in goodstype.goodstype_set.all%}
+                <p>{{gt.name}}</p>
+            {% empty%}
+                <p>没有下级类型</p>
+            {% endfor %}
+        </div>
+        <hr>
+    {% empty %}
+        <div>当前没有类型</div>
+    {% endfor %}
+</body>
+</html>

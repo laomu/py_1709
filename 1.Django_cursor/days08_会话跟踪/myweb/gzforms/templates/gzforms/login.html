@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'gzforms:f1' %}" method="post">
+    {% csrf_token %}
+    <!--姓名：<input type="text" name="name" id="name"><br />-->
+    {{name_form.name.errors}}
+    {{name_form.as_ul}}
+    <input type="submit" value="提交姓名">
+</form>
+</body>
+</html>

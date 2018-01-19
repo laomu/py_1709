@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息首页</title>
+    <link rel="stylesheet" href="/static/js/lib/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="/static/js/lib/jquery/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/lib/bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="page-header">
+            <h1>用户信息管理系统
+                <small>Django单个类型增删改查操作案例</small>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">用户操作</div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="/users/users_add/">新增用户</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading">用户信息查看</div>
+                <table class="table table-striped table-hover">
+                    <tr>
+                        <th>编号</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>操作</th>
+                    </tr>
+                    {% for users in ulist %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{users.name}}</td>
+                        <td>{{users.gender}}</td>
+                        <td>{{users.age}}</td>
+                        <td>
+                            <span class="label label-danger">
+                                管理员
+                            </span>
+                            <a href="/users/{{users.id}}/users_delete/">删除</a>
+                            <a href="/users/{{users.id}}/users_update/">编辑</a>
+                            <a href="/users/{{users.id}}/users_detail/">详细</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">暂时没有用户数据，请<a href="/users/users_add/">添加</a>新的用户数据</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

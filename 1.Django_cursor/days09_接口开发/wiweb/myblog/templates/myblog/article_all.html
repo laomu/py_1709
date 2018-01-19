@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看所有文章</title>
+</head>
+<body>
+<h1>文章观赏</h1>
+<ul>
+    {% for article in article_list %}
+    <li><a href="{% url 'myblog:article_detail' article.id%}">文章标题：{{article.title}}</a></li>
+    {% empty %}
+    <li>这里的用户很懒，没有任何文章发表，赶紧去 <a href="{% url 'myblog:article_pub'%}">发表</a> 一篇吧</li>
+{% endfor %}
+</ul>
+</body>
+</html>

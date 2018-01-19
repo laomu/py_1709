@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发表说说</title>
+    {% load static %}
+    <script src="{% static 'js/libs/jquery/jquery-2.2.4.min.js'%}"></script>
+</head>
+<body>
+<h1>发表说说</h1>
+写下你的感想：
+<textarea name="content" id="content" cols="30" rows="10"></textarea>
+<br />
+<button id="say">发表一条新的说说</button>
+<hr>
+<h3>历史说说</h3>
+<div id="history">
+    {% for say in say_list %}
+    <div>
+        <p>{{say.publish_time}}</p>
+        <p>{{say.content}}</p>
+    </div>
+    <hr/>
+    {% empty %}
+    <p id="none">当前没有发表过的说说</p>
+    {% endfor %}
+</div>
+<script>
+    $(function() {
+        $("#say").click(function() {
+            var $content = $("#content").val()
+
+            $.ajax({
+                url: "/myblog/users_say/",
+                type: "POST",
+                data: {
+                    content: $content
+                },
+                success: function(data) {
+                    console.log("发表成功")
+
+                    var $root = $("<div>")
+                    var $time = $("<p>")
+                    var $cont = $("<p>")
+
+                    $time.text(data.publish_time)
+                    $cont.text(data.content)
+
+                    $root.append($time).append($cont)
+
+                    $("#history").prepend($root)
+                    $("#none").css({"display": "none"})
+                },
+                error: function(data) {
+                    console.log("发表失败")
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

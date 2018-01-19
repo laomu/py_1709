@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" href="/static/js/libs/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/tempmark/css/index.css">
+    <script src="/static/js/libs/jquery/jquery-2.2.4.min.js"></script>
+    <script src="/static/js/libs/bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>-->
+    <!-- 模板标签：load标签，用来加载其他模块 -->
+    {% load static %}
+    <!-- 模板标签：static标签，用来加载静态静态 -->
+    <link rel="stylesheet" href="{% static 'js/libs/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'tempmark/css/index.css'%}">
+    <script src="{% static 'js/libs/jquery/jquery-2.2.4.min.js'%}"></script>
+    <script src="{% static 'js/libs/bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js'%}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>模板标签 <small>模板标签和模板继承</small></h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <!--根项目图片：<img src="/static/images/root.jpg" alt="">-->
+            根项目图片：<img src="{% static 'images/root.jpg' %}" alt="">
+            <br/>
+            <!--子项目图片：<img src="/static/tempmark/images/tp.jpg" alt="">-->
+            子项目图片：<img src="{% static 'tempmark/images/tp.jpg' %}" alt="">
+        </div>
+    </div>
+
+    {% comment %}
+        其他常见的模板标签：
+        {% csrf_token %}
+        {% if 条件 %} {% endif %}
+        {%for .. in ..%} {% empty %} {% endfor %}
+        {%url 'url名称' 参数列表%}
+
+        模板标签的语法：{%%}
+        模板变量输出：{{变量}}
+        备注：如果在模板标签中，使用模板变量，直接书写，不需要双大括号 {% url 'index' user.id %}
+    {% endcomment %}
+</div>
+</body>
+</html>

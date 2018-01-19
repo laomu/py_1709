@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页面</title>
+</head>
+<body>
+<h1>url地址反向解析-详情页面</h1>
+<h2>获取到信息：{{user}}</h2>
+<h2><a href="/ul/delete/">删除用户</a></h2>
+<!-- 视图页面中进行反向解析url -->
+<!-- 1.常规情况下，通过硬编码的方式编写url地址，但是这样的方式不利于项目的更新 -->
+<!-- 如果路由中的访问地址进行了修改，就需要修改大量的访问url地址-->
+<h2><a href="/ul/">常规返回首页</a></h2>
+<!-- 2. 可以通过模板标签的方式，修改url地址-->
+<h2><a href="{% url 'ul:index' %}">模板标签返回首页</a></h2>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+<!--
+天气预报接口
+http://wthrcdn.etouch.cn/weather_mini?city=
+
+异步编程~两种操作手段
+1. 通过前端Ajax实现异步处理，和其他服务器项目进行数据通信
+-->
+输入城市名称：<input type="text" name="city" id="city">
+<hr>
+<div id="info"></div>
+
+<script>
+    $("#city").blur(function() {
+        $.ajax({
+            url: "http://wthrcdn.etouch.cn/weather_mini",
+            type: "GET",
+            data: {
+                "city": $("#city").val()
+            },
+            success:function(data) {
+                console.log(data);// 字符串
+                console.log(JSON.parse(data));// 转换数据~string->json
+
+                // 获取天气数据
+                var _weather = JSON.parse(data).data;
+
+                // DOM操作渲染数据
+                var $p = $("<p>").text("城市：" + _weather.city);
+                var $hr = $("<hr>");
+                var $today1 = $("<p>").text("日期：" + _weather.forecast[0].date);
+                var $today2 = $("<p>").text("天气：" + _weather.forecast[0].type);
+                var $today3 = $("<p>").text("高温：" + _weather.forecast[0].high);
+                var $today4 = $("<p>").text("低温：" + _weather.forecast[0].low);
+                var $today5 = $("<p>").text("风向：" + _weather.forecast[0].fengxiang);
+                var $today6 = $("<p>").text("风力：" + _weather.forecast[0].fengli);
+
+                // 将数据添加到页面中
+                $("#info").empty().append($p);
+                // 添加今天数据
+                $("#info").append($hr).append($today1).append($today2).append($today3).append($today4)
+                    .append($today5).append($today6);
+            }
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天V1.0</title>
+    <script src="/static/jquery/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+<!-- 展示和服务器之间的通信历史信息 -->
+<div id="history">
+
+</div>
+发送消息：<textarea name="msg" id="msg" cols="30" rows="10"></textarea>
+<button id="send">发送</button>
+<hr>
+
+<script>
+    // 创建一个js中的websocket对象，保持和服务器之间的通信
+    // var _websocket = new WebSocket("websocket连接字符串，使用websocket协议连接")
+    var _websocket = new WebSocket("ws://192.168.11.102:8000/chat");
+
+    // 随时等待接受服务器的消息：保持一个长连接，一旦服务器有消息发送的话，需要实时接受
+    _websocket.onmessage = function(e) {
+        console.log("接收到服务器回复的消息：", e);
+        var _content = e.data; // 接受服务器发送的数据
+        console.log(_content);
+        var $p = $("<p>").text(_content);
+        $("#history").append($p);
+    };
+
+
+    $("#send").click(function() {
+        // 当点击按钮的时候，需要给服务器发送数据
+        var $msg = $("#msg").val();
+        _websocket.send($msg)
+    })
+</script>
+
+</body>
+</html>

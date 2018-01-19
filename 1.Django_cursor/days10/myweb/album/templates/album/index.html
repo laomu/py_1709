@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{width:100px;height:auto}
+    </style>
+</head>
+<body>
+<h1>相册管理首页</h1>
+{%for album in a_list%}
+<div>
+    <img src="/{{album.cover}}" alt="">
+    <p>相册名称：{{album.name}}</p>
+    <p><a href="{% url 'album:album_detail' album.id%}">查看相册内容</a></p>
+</div>
+<hr/>
+{% empty %}
+<p>当前没有任何相册，<a href="{% url 'album:album_create'%}">创建</a>一个新相册吧</p>
+{% endfor %}
+</body>
+</html>

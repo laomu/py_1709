@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建相册</title>
+</head>
+<body>
+<h1>上传照片</h1>
+<h3><a href="{% url 'album:index'%}">返回首页</a></h3>
+<h3>{{msg}}</h3>
+<form action="{% url 'album:photo_upload' a_id%}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    <input type="hidden" name="a_id" value="{{a_id}}">
+    照片名称: <input type="text" name="name" id="name"><br />
+    选择照片: <input type="file" name="photo" id="photo"><br />
+    <input type="submit" value="上传照片">
+</form>
+</body>
+</html>

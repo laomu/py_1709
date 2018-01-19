@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户详情</title>
+</head>
+<body>
+<h1>用户详细信息展示页面</h1>
+<table>
+    <tr>
+        <td>姓名</td>
+        <td>{{users.name}}</td>
+    </tr>
+    <tr>
+        <td>性别</td>
+        <td>{{users.gender}}</td>
+    </tr>
+    <tr>
+        <td>年龄</td>
+        <td>{{users.age}}</td>
+    </tr>
+    <tr>
+        <td>邮箱</td>
+        <td>{{users.email}}</td>
+    </tr>
+    <tr>
+        <td>联系方式</td>
+        <td>{{users.phone}}</td>
+    </tr>
+    <tr>
+        <td>生日</td>
+        <td>{{users.birthday | date:'Y-n-d'}}</td>
+    </tr>
+    <tr>
+        <td colspan="2">点击 <a href="/users/">返回首页</a></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 展示问题描述 -->
+<h1>{{ question.question_text }}</h1>
+
+<!-- 展示错误信息，通过if标签进行判断展示 -->
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<!-- 表单：进行投票应用 -->
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+
+    <!-- 循环展示当前问题的所有解决方案：通过一对多的关系查询所有的choice并展示到页面上 -->
+    {% for choice in question.choice_set.all %}
+        <!-- 通过一组单选按钮，可以选择某个解决方案 -->
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+        <!-- label就是展示解决方案描述信息，主要目的是让用户能看到某个解决方案 -->
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    {% endfor %}
+    <input type="submit" value="投它一票" />
+</form>
+</body>
+</html>

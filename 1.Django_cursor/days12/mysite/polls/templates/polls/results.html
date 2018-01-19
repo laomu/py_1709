@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 展示问题描述信息 -->
+<h1>{{ question.question_text }}</h1>
+
+<!-- 循环遍历所有的解决方案，以及解决方案的投票数量 -->
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} 票数</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">再次投票?</a>
+</body>
+</html>

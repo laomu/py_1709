@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看文章详情页面</title>
+    {% load static %}
+    <script src="{% static 'js/libs/jquery/jquery-2.2.4.min.js'%}"></script>
+</head>
+<body>
+<h3>{{article.title}} <small>查看文章详情</small></h3>
+<h4>发表时间：{{article.publish_time}}</h4>
+<p>
+    文章内容：{{article.content}}
+</p>
+<hr/>
+<h3>文章评论：</h3>
+评论内容：<textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+<br />
+<button id="pub_comment">发表评论</button>
+<hr>
+<div id="history">
+
+</div>
+
+
+
+
+<script>
+    $(function() {
+        $("#pub_comment").click(function() {
+            // 获取textarea中的内容
+            var $comment = $("#comment").val()
+            var a_id = {{article.id}}
+
+            // ajax发表
+            $.ajax({
+                url: "/myblog/comment_pub/",
+                type: "POST",
+                data: {
+                    content: $comment,
+                    a_id: a_id
+                },
+                success: function(data) {
+                    console.log("发表成功", data)
+
+                    var $root = $("<div>")
+                    var $users = $("<p>")
+                    var $time = $("<p>")
+                    var $content = $("<p>")
+
+                    $users.text(data.users)
+                    $time.text(data.publish_time)
+                    $content.text(data.content)
+
+                    $root.append($users).append($time).append($content)
+
+                    $("#history").prepend($root)
+                },
+                error:function(data) {
+                    console.log("失败了...")
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>

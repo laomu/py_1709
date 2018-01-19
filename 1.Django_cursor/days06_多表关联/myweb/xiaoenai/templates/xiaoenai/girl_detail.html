@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>美女详细信息页面</title>
+</head>
+<body>
+<h1>个人详情</h1>
+<p>姓名：{{girl.name}}</p>
+<p>性别：{{girl.gender}}</p>
+<p>年龄：{{girl.age}}</p>
+<p>联系方式：{{girl.phone}}</p>
+<p>邮箱：{{girl.email}}</p>
+<div>
+    爱的宣言：
+    <ul>
+    {% for gs in girl.girlsay_set.all %}
+    <li>{{gs.content}}</li>
+    {% empty %}
+    <li>这个用户很懒，什么都没有说！</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<p>
+<form action="/enai/{{girl.id}}/girl_detail/" method="post">
+    {% csrf_token %}
+    爱的宣言：<textarea name="content" id="content" cols="30" rows="10"></textarea>
+    <input type="submit" value="发布爱的宣言">
+</form>
+</p>
+<p><a href="/enai/">返回首页</a></p>
+
+</body>
+</html>

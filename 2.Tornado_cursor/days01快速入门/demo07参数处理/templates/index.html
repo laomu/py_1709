@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>系统首页</h1>
+<h2>当前用户{{user}}--{{user['name']}}</h2>
+<hr>
+<h2>get提交数据</h2>
+<form action="/params" method="get">
+    name: <input type="text" name="name" id="name"><br />
+    fav: <input type="checkbox" name="fav" id="fav1" value="英雄联盟">英雄联盟
+    <input type="checkbox" name="fav" id="fav2" value="DOTA2">DOTA2
+    <input type="checkbox" name="fav" id="fav3" value="魂斗罗">魂斗罗<br />
+
+    <input type="submit" value="get提交数据">
+</form>
+<hr/>
+<h2>post提交数据</h2>
+<form action="/params" method="post">
+    account: <input type="text" name="account" id="account"><br />
+    fav: <input type="checkbox" name="fav" id="fav11" value="英雄联盟">英雄联盟
+    <input type="checkbox" name="fav" id="fav22" value="DOTA2">DOTA2
+    <input type="checkbox" name="fav" id="fav33" value="魂斗罗">魂斗罗<br />
+
+    <input type="submit" value="post提交数据">
+</form>
+<hr>
+<ul>
+{% if books %}
+    {% for book in books%}
+    <li><a href="#">书名：{{book['name']}}--单价：{{book['price']}}
+        --购买数量:{{book['buycount']}}--小计金额：{{book['price'] * book['buycount']}}</a>
+    </li>
+    {% end %}
+{% else %}
+<li>当前没有任何书籍</li>
+{% end %}
+</ul>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>博客首页</h1>
+<!-- 顶部导航欢迎信息 -->
+{% if request.session.login %}
+<p>尊敬的{{request.session.login.nickname}}用户，欢迎访问本系统</p>
+<p><a href="{% url 'myblog:logout'%}">安全退出</a></p>
+{% else %}
+<p>欢迎访问</p>
+<p><a href="{% url 'myblog:login' %}">[登录]</a></p>
+<p><a href="{% url 'myblog:register'%}">[注册]</a></p>
+{% endif %}
+
+
+<!-- 功能列表 -->
+{% if request.session.login %}
+    <div>
+        <p><a href="{% url 'myblog:users_say' %}">发表说说</a></p>
+        <p><a href="{% url 'myblog:article_pub' %}">发表文章</a></p>
+        <p><a href="{% url 'myblog:article_self' %}">管理文章</a></p>
+        <p><a href="{% url 'myblog:article_all' %}">查看所有文章</a></p>
+    </div>
+    <hr/>
+    <h3>已经发表的说说</h3>
+    {% for say in say_list %}
+        <div>
+            <p>{{say.publish_time}}</p>
+            <p>{{say.content}}</p>
+        </div>
+        <hr/>
+    {% empty %}
+        <p>这个用户很懒，还没有发表任何说说</p>
+    {% endfor %}
+
+{% endif %}
+
+</body>
+</html>

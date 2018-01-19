@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页：发表说说</title>
+    {% load static %}
+    <script src="{% static 'js/libs/jquery/jquery-2.2.4.min.js' %}"></script>
+</head>
+<body>
+<h1>系统首页 <small>发表说说</small></h1>
+<!--
+    这里发表说说不能通过表单的方式进行提交->导致页面刷新
+    要使用Ajax的方式进行提交数据替代
+-->
+<!--<form action="{% url 'wisay:say' %}" method="post">
+    写出你的感想：
+    <textarea name="content" id="content" cols="30" rows="10"></textarea>
+    <br />
+    <input type="submit" value="发表">
+</form>-->
+    写出你的感想：
+    <textarea name="content" id="content" cols="30" rows="10"></textarea>
+    <br />
+    <button id="say">发表说说</button>
+    <hr/>
+    <div id="history">
+        {% for say in s_list %}
+        <div>
+            <p>{{say.publish_time | date:'Y-m-d H:i:s l A'}}</p>
+            <p>{{say.content}}</p>
+        </div>
+        {% empty %}
+        <div>
+            <p>这个用户很懒，还没有发表任何说说</p>
+        </div>
+        {% endfor %}
+    </div>
+
+<script>
+    $(function() {
+        // 给按钮增加一个单击事件
+        $("#say").click(function() {
+            // 获取内容:jquery的变量名称一般以$符号开头；js的变量名称一般以下划线开头
+            var $content = $("#content").val()
+
+            // 发送ajax请求
+            $.ajax({
+                url: "/wisay/say/",
+                type: "POST",
+                data: {
+                    content: $content
+                },
+                success: function(data) {
+                    console.log("Ajax操作成功", data)
+                    // 通过DOM操作，将数据展示到页面中
+                    // 创建标签:$("div")选择器 $("<div>")创建div标签
+                    var $root = $("<div>")
+                    var $time = $("<p>")
+                    var $content = $("<p>")
+                    // 将内容添加到标签中
+                    $time.text(data.publish_time)
+                    $content.text(data.content)
+                    // 将标签添加到$root标签中
+                    $root.append($time).append($content)
+                    // 将$root标签添加到网页中
+                    $("#history").prepend($root)
+                    // 清空输入框中的信息
+                    $("#content").val("")
+                },
+                error: function() {
+                    console.log("Ajax操作失败")
+                }
+            })
+        })
+    })
+
+    /*
+       授课期间，自定义js代码，会写在当前html页面中，方便代码阅读
+       实际开发是，请将js代码写在单独的js文件中，保存在js/apps/目录下，在html页面中引入使用
+    */
+</script>
+</body>
+</html>

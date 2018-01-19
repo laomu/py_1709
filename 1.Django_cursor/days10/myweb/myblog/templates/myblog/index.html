@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>文件原始上传</h1>
+    <!--
+    文件上传；注意的重点内容
+    1. 只能post方式上传
+    2. form表单要添加编码方式：enctype="multipart/form-data"
+    -->
+    <h3>{{msg}}</h3>
+    <form action="{% url 'myblog:upload' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        文件：<input type="file" name="myfile" id="file"><br />
+        <input type="submit" value="文件上传">
+    </form>
+
+    <hr>
+    <h2>用户头像上传</h2>
+    <form action="{% url 'myblog:header_upload'%}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        姓名：<input type="text" name="name" id="name"><br />
+        头像：<input type="file" name="header" id="header"><br />
+        <input type="submit" value="提交">
+    </form>
+    <hr>
+    <div>
+        <p>{{user.name}}</p>
+        <!--
+        头像不能正常展示：
+        因为头像的保存路径出现的问题
+        1. 将头像直接保存在根路径下的文件夹中【推荐】
+        2. 将头像保存在对应的子模块项目中，在页面中进行展示时通过过滤器进行字符串的截取
+        -->
+        <p><img src="/{{user.header_img}}" alt=""></p>
+    </div>
+</body>
+</html>

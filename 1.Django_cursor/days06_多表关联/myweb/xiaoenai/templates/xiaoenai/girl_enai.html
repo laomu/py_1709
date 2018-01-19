@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>美女择偶页面</title>
+</head>
+<body>
+<h1>非诚勿扰</h1>
+<h2>选择您心仪的对象吧!</h2>
+<form action="/enai/{{girl.id}}/girl_enai/" method="post">
+    {% csrf_token %}
+    待选列表：
+    <select name="boy" id="boy">
+        <option>--请选择--</option>
+        {% for boy in blist %}
+        <option value="{{boy.id}}">{{boy.name}}</option>
+        {% empty %}
+        <option>当前没有可选的帅哥</option>
+        {% endfor %}
+    </select>
+    <br />
+    <input type="submit" value="占有！">
+</form>
+</body>
+</html>

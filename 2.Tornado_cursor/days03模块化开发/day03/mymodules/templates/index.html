@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>hello tornado</h1>
+<ul>
+{% for person in personlist %}
+<li>{{person.name}}--{{person.age}}</li>
+{% empty %}
+暂时没有用户信息
+{% end %}
+</ul>
+</body>
+</html>

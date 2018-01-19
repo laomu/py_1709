@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相册详情页面</title>
+</head>
+<body>
+<h1>查看相册详情</h1>
+<p><a href="{% url 'album:photo_upload' album.id%}">上传照片</a></p>
+{% for photo in p_list %}
+<div>
+    <p><img src="/{{photo.photo}}" alt=""></p>
+    <p>照片名称：{{photo.name}}</p>
+</div>
+<hr/>
+{% empty %}
+<p>当前相册没有任何照片，赶紧 <a href="{% url 'album:photo_upload' album.id%}">上传</a> 你新的照片吧</p>
+{% endfor %}
+</body>
+</html>

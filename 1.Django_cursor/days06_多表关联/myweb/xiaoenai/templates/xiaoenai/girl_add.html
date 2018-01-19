@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加帅哥</title>
+</head>
+<body>
+<h1>添加一个GIRL</h1>
+<h3>{{msg}}</h3>
+<h3><a href="/enai/">返回首页</a></h3>
+<form action="/enai/girl_add/" method="post">
+    {% csrf_token %}
+    姓名：<input type="text" name="name" id="name"><br />
+    年龄：<input type="text" name="age" id="age"><br />
+    <input type="submit" value="提交GIRL">
+</form>
+</body>
+</html>

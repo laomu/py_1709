@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>请求方式</h1>
+<form action="#" method="get">
+    账号：<input type="text" name="username"><br />
+    密码：<input type="text" name="password"><br />
+    <input type="submit" value="GET提交">
+</form>
+<form action="#" method="post">
+    账号：<input type="text" name="username"><br />
+    密码：<input type="text" name="password"><br />
+    <input type="submit" value="POST提交">
+</form>
+<hr>
+<h1>get方式传递参数</h1>
+<form action="/df/get/" method="get">
+    账号：<input type="text" name="username"><br />
+    密码：<input type="text" name="password"><br />
+    爱好：<input type="checkbox" name="fav" id="1" value="LOL">LOL<br />
+    <input type="checkbox" name="fav" id="2" value="吃鸡">吃鸡<br />
+    <input type="checkbox" name="fav" id="3" value="CF">CF<br />
+
+    <input type="submit" value="GET传递参数">
+</form>
+<h1>POST方式传递参数</h1>
+<form action="/df/post/" method="post">
+    {% csrf_token %}<!-- 令牌 -->
+    账号：<input type="text" name="name"><br />
+    密码：<input type="text" name="pass"><br />
+    <input type="submit" value="POST传递参数">
+</form>
+</body>
+</html>

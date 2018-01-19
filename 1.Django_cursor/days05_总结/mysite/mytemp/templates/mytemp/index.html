@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后端程序传递的数据展示</title>
+</head>
+<body>
+<h1>后端程序传递的数据展示</h1>
+<p>简单的变量数据展示：{{msg}}</p>
+<p>对象数据的传递：{{user.name}}</p>
+<p>列表数据的展示：{{mlist}}</p>
+<!--<p>字典数据的展示：{{mdict}}</p>-->
+{% comment %}
+<!--<p>Django:DTL语法中，不支持运算：{{1 + 2}}</p>-->
+{% endcomment %}
+
+<h1>程序结构的操作</h1>
+{% if luser %}
+<p>您已经登录系统，欢迎访问本系统...</p>
+{% else %}
+<p>您还没有登录</p>
+{% endif %}
+<hr>
+<p>用户信息列表</p>
+{% for user in ulist %}
+<p>{{user.name | upper }}</p>
+{% empty %}
+<p>当前没有用户信息</p>
+{% endfor %}
+
+
+</body>
+</html>

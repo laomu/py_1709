@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>抽奖</title>
+	<style type="text/css">
+		#container{width:500px;height:600px;border:solid 2px orange;border-radius:8px;margin:auto;}
+		#show{width:450px;height:450px;margin:auto;border:solid 2px orange;border-radius:50%;margin-top:10px;margin-bottom: 20px;}
+		#info{width:420px;height:420px;background:orange;border-radius:50%;font-size:70px;margin:15px 15px;font-family: "微软雅黑";text-align: center;line-height:420px;}
+		#btn{width:200px;display:block;margin:auto;height:50px;background:orange;font-size:24px;}
+	</style>
+</head>
+<body>
+<div id="container">
+	<div id="show">
+		<div id="info">等待抽奖</div>
+	</div>
+	<button id="btn">开始抽奖</button>
+</div>
+<script type="text/javascript">
+	names = ["邢思桐", "曹如月", "张月浩","李锦宜", "王帅",
+			"高峰", "王镜博", "李保罗", "李丹丹", "孙钢红",
+			"张龙印", "董朝阳", "姬鹏", "胡振华", "蔡海俊",
+			"李鹏辉", "姚陈明", "尹新峰"]
+	_btn = document.getElementById("btn")
+	_info = document.getElementById("info")
+	_flag = true
+	_timer = null
+	_btn.onclick = function() {
+		if (_flag) {
+			_timer = setInterval(function() {
+				_no = Math.floor(Math.random()*names.length)
+				_name = names[_no]
+				_info.textContent = _name
+				_btn.textContent = "停止抽奖"
+				_flag = false
+			}, 50)
+		} else {
+			clearInterval(_timer)
+			_btn.textContent = "开始抽奖"
+			_flag = true
+		}
+		
+
+	}
+</script>
+</body>
+</html>

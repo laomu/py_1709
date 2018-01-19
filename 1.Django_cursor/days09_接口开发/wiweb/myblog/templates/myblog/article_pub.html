@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发表文章页面</title>
+</head>
+<body>
+<h1>发表文章</h1>
+<h3>{{msg}}</h3>
+<form action="{% url 'myblog:article_pub'%}" method="post">
+    文章标题：<input type="text" name="title" id="title"><br />
+    文章内容：<textarea name="content" id="content" cols="80" rows="20"></textarea>
+    <br />
+    <input type="submit" value="发表">
+</form>
+</body>
+</html>

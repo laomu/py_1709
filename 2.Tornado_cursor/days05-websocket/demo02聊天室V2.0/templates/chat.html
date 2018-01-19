@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PY1709聊天室</title>
+    <link rel="stylesheet" href="/static/css/chat.css">
+    <script src="/static/js/jquery/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+<!-- 聊天室主窗口 -->
+<div id="container">
+    <!-- 标题窗口 -->
+    <div id="title">
+        欢迎进入PY1709聊天室
+    </div>
+
+    <!-- 历史信息窗口 -->
+    <div id="history">
+        <div class="message">
+            <p>2017-12-29 12:00:00</p>
+            <p>欢迎[XXX]进入py1709聊天室</p>
+        </div>
+    </div>
+
+    <!-- 广告信息窗口 -->
+    <div id="info">
+
+    </div>
+
+    <!-- 消息发送窗口 -->
+    <textarea name="msg" id="msg" cols="30" rows="10"></textarea>
+    <button id="send">发送</button>
+
+
+    <script>
+        // 创建一个websocket对象
+        var _websocket = new WebSocket("ws://192.168.11.102:8000/chat")
+
+        // 发送消息
+        $("#send").click(function() {
+            var $msg = $("#msg").val();// 获取输入框中的数据
+            if($msg.trim().length <= 0) {
+                alert("不能发送空消息")
+            }else {
+                 _websocket.send($msg);//发送数据给服务器
+                $("#msg").val('');// 清空输入框中的数据
+            }
+        })
+
+        // 接受消息
+        _websocket.onmessage = function(e) {
+            var _content = e.data;//接受到服务器的数据
+            var _date = new Date();//获取当前时间
+
+            var $div = $("<div>").attr("class", "message");
+            var $ptime = $("<p>").text(_date);
+            var $pmsg = $("<p>").text(_content);
+
+            $div.append($ptime).append($pmsg)
+
+            $("#history").append($div)
+
+            // 处理让消息窗口的滚动条显示在最底下的位置
+            $("#history").scrollTop($("#history")[0].scrollHeight)
+
+        }
+
+    </script>
+</div>
+</body>
+</html>

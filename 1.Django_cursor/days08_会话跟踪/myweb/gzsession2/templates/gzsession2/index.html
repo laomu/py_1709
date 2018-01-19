@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>首页</h1>
+<h2>尊敬的{{request.session.login.ctype.name}}
+    {{request.session.login.nickname}}，
+    欢迎访问系统</h2>
+<h2>当前可操作菜单</h2>
+<ul>
+    {% for menus in m_list %}
+    <li><a href="{{menus.path}}">{{menus.name}}</a></li>
+    {% empty %}
+    <li>当前没有可操作的菜单</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

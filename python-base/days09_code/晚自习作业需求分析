@@ -1,0 +1,43 @@
+晚自习任务：需求分析
+
+任务：百合网
+
+功能：
+	[内置用户]
+	before:
+		u1 = {"username":"admin", "password":"admin"}
+	after:
+		u1 = {"username":"admin", "password":"16f9bcb43414cba50bb4a050ba6796f756c442c7474812912327dd2bb2eb9d3a14a8e169e60bb4ef317c28cc035fd5396ee7ddf7cfda5e436fd907c7ef559307"}
+	注册
+		输入账号_uname
+			判断账号是否可用
+		输入密码_passwd
+			密码加密_passwdx
+		创建用户字典u = {"username": uname, "password": passwdx}
+		保存到系统字典中 users[uname] = u
+	登录
+		输入账号——uname
+		输入密码——passwd
+			密码加密——passwdx
+		和系统中的用户数据进行比较
+			uname == users->username
+			passwdx == users->password
+	首页
+		菜单展示
+
+	完善个人资料
+		获取当前登录用户
+		提示用户输入要修改的属性[性别/婚否/年龄/..]
+		更新用户信息
+			[如果用户修改的是个人介绍，base64.b64encode(intro)编码]
+		结束
+			-展示用户新信息
+			-按任意键返回首页
+	修改登录密码
+		> 输入原始密码
+		> 输入新密码
+		> 确认新密码
+		> 更新用户密码
+		> 跳转到登录菜单
+
+	

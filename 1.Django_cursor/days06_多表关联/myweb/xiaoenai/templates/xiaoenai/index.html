@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>展示恩爱所有用户</title>
+</head>
+<body>
+<p>
+    <a href="/enai/boy_add/">[添加帅哥]</a><br />
+    <a href="/enai/girl_add/">[添加美女]</a>
+</p>
+
+<h1>所有的boy</h1>
+<table>
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>配偶</th>
+        <th>操作</th>
+    </tr>
+    {% for boy in blist %}<!-- blist [] None -->
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{boy.name}}</td>
+        <td>{{boy.age}}</td>
+        <td>{{boy.girl.name}}</td>
+        <td><a href="#">选择您心仪的对象吧!</a></td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">暂时没有帅哥注册</td>
+    </tr>
+    {% endfor %}
+</table>
+<hr/>
+<h1>所有的girl</h1>
+<table>
+    <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>配偶</th>
+        <th>操作</th>
+    </tr>
+    {% for girl in glist %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{girl.name}}</td>
+        <td>{{girl.age}}</td>
+        <td>{{girl.boy.name}}</td>
+        <td>
+            <a href="/enai/{{girl.id}}/girl_enai/">选择您心仪的对象吧!</a>
+            <a href="/enai/{{girl.id}}/girl_detail/">[查看详细信息!]</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">暂时没有美女注册</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

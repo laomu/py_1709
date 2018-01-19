@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+<h1>这是项目首页</h1>
+<!-- flask默认使用jinja2模板语法，如果开发人员想使用其他的语法结构，可以进行替换 -->
+{% for person in plist %}
+    <p>{{person['name']}}</p>
+{% else %}
+    <p>没有用户展示</p>
+{% endfor %}
+</body>
+</html>

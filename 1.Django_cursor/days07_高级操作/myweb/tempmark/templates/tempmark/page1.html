@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 模板标签：load标签，用来加载其他模块 -->
+    {% load static %}
+    <!-- 模板标签：static标签，用来加载静态静态 -->
+    <link rel="stylesheet" href="{% static 'js/libs/bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'tempmark/css/index.css'%}">
+    <script src="{% static 'js/libs/jquery/jquery-2.2.4.min.js'%}"></script>
+    <script src="{% static 'js/libs/bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js'%}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>page1页面 <small>代码好多呀</small></h1>
+        </div>
+    </div>
+</body>
+</html>
